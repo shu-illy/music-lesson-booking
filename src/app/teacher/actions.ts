@@ -1,9 +1,8 @@
-'use server';
+"use server";
 
-import { redirect, RedirectType } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 
 export const createLessonAction = async (formData: FormData) => {
-  const title = formData.get("title")
-  // redirect("/teacher", RedirectType.replace)
-  
-}
+	const title = formData.get("title");
+	// redirect("/teacher", RedirectType.replace)
+};

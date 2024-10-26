@@ -1,18 +1,16 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
 import { createLessonAction } from "@/app/teacher/actions";
+import moment from "moment";
+import { type FormEvent, useState } from "react";
 import {
 	Calendar,
 	type Event,
-	momentLocalizer,
 	type SlotInfo,
+	momentLocalizer,
 } from "react-big-calendar";
-import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
 	Dialog,
 	DialogContent,
@@ -20,6 +18,8 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
 	Select,
 	SelectContent,
