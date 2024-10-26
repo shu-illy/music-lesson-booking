@@ -20,6 +20,13 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
 moment.locale("ja");
 const localizer = momentLocalizer(moment);
@@ -27,9 +34,11 @@ const localizer = momentLocalizer(moment);
 export default function TeacherDashboard() {
 	const [events, setEvents] = useState<Event[]>([]);
 	const [selectedSlot, setSelectedSlot] = useState<SlotInfo | null>(null);
+	const [startTime, setStartTime] = useState("07:00");
 
 	const handleSelectSlot = (slotInfo: SlotInfo) => {
 		setSelectedSlot(slotInfo);
+		setStartTime("07:00");
 	};
 
 	const handleCreateLesson = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,14 +47,41 @@ export default function TeacherDashboard() {
 		const formData = new FormData(e.currentTarget);
 		await createLessonAction(formData);
 		const title = formData.get("title");
-		console.log(title?.toString());
+		const start = moment(selectedSlot.start)
+			.set({
+				hour: Number.parseInt(startTime.split(":")[0]),
+				minute: Number.parseInt(startTime.split(":")[1]),
+			})
+			.toDate();
+		const end = moment(start).add(1, "hour").toDate();
 		const newEvent = {
 			title: title?.toString() ?? "",
-			start: selectedSlot.start,
-			end: moment(selectedSlot.start).add(1, "hour").toDate(),
+			start,
+			end,
 		};
 		setEvents([...events, newEvent]);
 		setSelectedSlot(null);
+	};
+
+	const generateTimeOptions = () => {
+		const options = [];
+		for (let hour = 7; hour < 21; hour++) {
+			for (let minute = 0; minute < 60; minute += 15) {
+				const time = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
+				options.push(
+					<SelectItem key={time} value={time}>
+						{time}
+					</SelectItem>,
+				);
+			}
+		}
+		// Add 21:00 as the last option
+		options.push(
+			<SelectItem key="21:00" value="21:00">
+				21:00
+			</SelectItem>,
+		);
+		return options;
 	};
 
 	return (
@@ -72,11 +108,37 @@ export default function TeacherDashboard() {
 							<Input id="title" name="title" required />
 						</div>
 						<div>
-							<Label>日時</Label>
-							<p>
-								{selectedSlot &&
-									moment(selectedSlot.start).format("YYYY年MM月DD日 HH:mm")}
-							</p>
+							<Label htmlFor="date">日付</Label>
+							<Input
+								id="date"
+								value={
+									selectedSlot
+										? moment(selectedSlot.start).format("YYYY-MM-DD")
+										: ""
+								}
+								disabled
+							/>
+						</div>
+						<div>
+							<Label htmlFor="startTime">開始時刻</Label>
+							<Select value={startTime} onValueChange={setStartTime}>
+								<SelectTrigger>
+									<SelectValue placeholder="開始時刻を選択" />
+								</SelectTrigger>
+								<SelectContent>{generateTimeOptions()}</SelectContent>
+							</Select>
+						</div>
+						<div>
+							<Label htmlFor="endTime">終了時刻</Label>
+							<Input
+								id="endTime"
+								value={
+									startTime
+										? moment(startTime, "HH:mm").add(1, "hour").format("HH:mm")
+										: ""
+								}
+								disabled
+							/>
 						</div>
 						<Button type="submit">作成</Button>
 					</form>
