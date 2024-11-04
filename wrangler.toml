@@ -1,0 +1,8 @@
+name = "music-lesson-booking"
+main = "src/index.ts"
+compatibility_date = "2023-01-01"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "music-lesson-booking"
+database_id = "5fb061ff-1e1d-4cca-a1b5-609727ac0836"
