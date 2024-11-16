@@ -2,14 +2,19 @@
   "name": "music-lesson-booking",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "bun run next dev",
     "build": "bun run next build",
     "start": "bun run next start",
     "lint": "biome lint ./src/**/*.{ts,tsx}",
     "lint:w": "biome check --write --unsafe ./src/**/*.{ts,tsx}",
-    "generate": "drizzle-kit generate --config=drizzle.config.ts",
-    "up": "drizzle-kit up --schema=src/lib/schema"
+    "db:generate": "drizzle-kit generate:sqlite --config=drizzle.config.dev.ts",
+    "db:migrate": "tsx src/lib/migrate.ts",
+    "db:push": "drizzle-kit push:sqlite --config=drizzle.config.dev.ts",
+    "db:studio": "drizzle-kit studio --config=drizzle.config.dev.ts",
+    "db:generate:prd": "drizzle-kit generate:sqlite --config=drizzle.config.prd.ts",
+    "db:push:prd": "wrangler d1 migrations apply music-lesson-booking --local"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
@@ -41,14 +46,18 @@
     "@biomejs/biome": "1.9.4",
     "@cloudflare/workers-types": "^4.20241022.0",
     "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.11",
     "@types/node": "^22.8.7",
     "@types/react": "^18.3.12",
     "@types/react-big-calendar": "^1.15.0",
     "@types/react-dom": "^18",
     "autoprefixer": "latest",
+    "better-sqlite3": "^11.5.0",
     "drizzle-kit": "^0.27.1",
     "postcss": "latest",
     "tailwindcss": "latest",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "wrangler": "^3.84.1"
   }

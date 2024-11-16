@@ -11,7 +11,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -29,7 +29,9 @@
     "types": [
       "@cloudflare/workers-types"
     ],
-    "target": "ES2017"
+    "target": "ES2020",
+    "noErrorTruncation": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "next-env.d.ts",
@@ -39,5 +41,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }
