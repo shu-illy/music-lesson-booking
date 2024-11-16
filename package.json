@@ -7,7 +7,9 @@
     "build": "bun run next build",
     "start": "bun run next start",
     "lint": "biome lint ./src/**/*.{ts,tsx}",
-    "lint:w": "biome check --write --unsafe ./src/**/*.{ts,tsx}"
+    "lint:w": "biome check --write --unsafe ./src/**/*.{ts,tsx}",
+    "generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "up": "drizzle-kit up --schema=src/lib/schema"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
@@ -23,7 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "drizzle-orm": "^0.36.0",
+    "drizzle-orm": "^0.36.3",
     "lucide-react": "^0.454.0",
     "moment": "^2.30.1",
     "next": "latest",
