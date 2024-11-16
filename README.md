@@ -23,5 +23,4 @@ bun dev
   - データベース管理: `pnpm db:studio`
 
 - 本番環境
-  - マイグレーションファイルの生成: `pnpm db:generate:prd`
-  - マイグレーションの適用: `pnpm db:push:prd`
+  - マイグレーションの適用: `pnpm db:apply:prd`

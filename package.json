@@ -9,12 +9,11 @@
     "start": "bun run next start",
     "lint": "biome lint ./src/**/*.{ts,tsx}",
     "lint:w": "biome check --write --unsafe ./src/**/*.{ts,tsx}",
-    "db:generate": "drizzle-kit generate:sqlite --config=drizzle.config.dev.ts",
+    "db:generate": "drizzle-kit generate --config=drizzle.config.dev.ts",
     "db:migrate": "tsx src/lib/migrate.ts",
-    "db:push": "drizzle-kit push:sqlite --config=drizzle.config.dev.ts",
+    "db:push": "drizzle-kit push --config=drizzle.config.dev.ts",
     "db:studio": "drizzle-kit studio --config=drizzle.config.dev.ts",
-    "db:generate:prd": "drizzle-kit generate:sqlite --config=drizzle.config.prd.ts",
-    "db:push:prd": "wrangler d1 migrations apply music-lesson-booking --local"
+    "db:apply:prd": "wrangler d1 migrations apply music-lesson-booking --remote"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",

@@ -6,3 +6,4 @@ compatibility_date = "2023-01-01"
 binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "music-lesson-booking"
 database_id = "5fb061ff-1e1d-4cca-a1b5-609727ac0836"
+migrations_dir = "src/lib/migrations"
