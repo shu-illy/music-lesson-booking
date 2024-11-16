@@ -18,9 +18,8 @@ bun dev
 
 - 開発環境:
   - schemaの差分からマイグレーションファイルの生成: `pnpm db:generate`
-  - マイグレーションの実行: `pnpm db:migrate`
-  - スキーマ変更の直接適用: `pnpm db:push`
+  - マイグレーションの実行: `pnpm db:migrate:dev`
   - データベース管理: `pnpm db:studio`
 
 - 本番環境
-  - マイグレーションの適用: `pnpm db:apply:prd`
+  - マイグレーションの適用: `pnpm db:migrate:prd`
